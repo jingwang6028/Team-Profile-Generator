@@ -3,12 +3,16 @@ const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-// import requirer
-var inquirer = require("inquirer");
+// import requirer and fs
+const inquirer = require("inquirer");
+const fs = require("fs");
+
+const generateHTML = require("./src/generateHTML");
 
 class Team {
   constructor() {}
 
+  // ask for if needed to add another member
   askForAddMember(data) {
     if (data.addmember == "Engineer") {
       this.inputEngineer();
@@ -19,6 +23,7 @@ class Team {
     }
   }
 
+  // inquirer prompt questions for manager
   inputManager() {
     inquirer
       .prompt([
@@ -55,7 +60,7 @@ class Team {
       ])
       .then((answers) => {
         console.log(answers);
-        const newManager = new Manager(
+        let newManager = new Manager(
           answers.managername,
           answers.id,
           answers.email,
@@ -66,6 +71,7 @@ class Team {
       });
   }
 
+  // inquirer prompt questions for engineer
   inputEngineer() {
     inquirer
       .prompt([
@@ -102,7 +108,7 @@ class Team {
       ])
       .then((answers) => {
         console.log(answers);
-        const newEngineer = new Engineer(
+        let newEngineer = new Engineer(
           answers.engineername,
           answers.id,
           answers.email,
@@ -112,6 +118,7 @@ class Team {
       });
   }
 
+  // inquirer prompt questions for intern
   inputIntern() {
     inquirer
       .prompt([
@@ -148,7 +155,7 @@ class Team {
       ])
       .then((answers) => {
         console.log(answers);
-        const newIntern = new Intern(
+        let newIntern = new Intern(
           answers.internname,
           answers.id,
           answers.email,
@@ -160,8 +167,6 @@ class Team {
 
   quit() {}
 }
-// generate answers and put in card
-// display card in html page
-// generate html and css page
+
 const team = new Team();
 team.inputManager();
