@@ -1,7 +1,6 @@
 // generate manager card
 const generateManager = function (manager) {
-  return `<div class="col-4">
-  <div class="card">
+  return `<div class="col-4 card">
       <div class="card-header">
           <h3>${manager.name}</h3>
           <div class="d-flex flex-row align-items-center">
@@ -11,17 +10,16 @@ const generateManager = function (manager) {
       </div>
       <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${manager.id}</li>
-          <li class="list-group-item">Email: ${manager.email}</li>
-          <li class="list-group-item">Office number: ${manager.officenumber}</li>
+          <li class="list-group-item">
+          Email: <a href="mailto: ${manager.mail}">${manager.email}</a></li>
+          <li class="list-group-item">Office number: ${manager.officeNumber}</li>
       </ul>
-  </div>
-</div>`;
+  </div>`;
 };
 
 // generate engineer card
 const generateEngineer = function (engineer) {
-  return `<div class="col-4">
-  <div class="card">
+  return `<div class="col-4 card">
       <div class="card-header">
           <h3>${engineer.name}</h3>
           <div class="d-flex flex-row align-items-center">
@@ -34,14 +32,12 @@ const generateEngineer = function (engineer) {
           <li class="list-group-item">Email: ${engineer.email}</li>
           <li class="list-group-item">GitHub: <a href="#">${engineer.github}</a></li>
       </ul>
-  </div>
-</div>`;
+  </div>`;
 };
 
 // generate intern card
 const generateIntern = function (intern) {
-  return `<div class="col-4">
-    <div class="card">
+  return `<div class="col-4 card">
         <div class="card-header">
             <h3>${intern.name}</h3>
             <div class="d-flex flex-row align-items-center">
@@ -51,11 +47,10 @@ const generateIntern = function (intern) {
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${intern.id}</li>
-            <li class="list-group-item">Email: ${intern.email}</li>
+            <li class="list-group-item">Email: <a href="mailto: ${intern.mail}">${intern.email}</a></li>
             <li class="list-group-item">School: ${intern.school}</li>
         </ul>
-    </div>
-</div>`;
+    </div>`;
 };
 
 // for how many employees in the team, put all member card together
@@ -88,8 +83,8 @@ function generateCard(data) {
 
   return teamReady;
 }
-// generate HTML page
 
+// generate HTML page, put allEmployeesCard inside a html file
 function generateTeam(allEmployeesCards) {
   return `<!DOCTYPE html>
   <html lang="en">

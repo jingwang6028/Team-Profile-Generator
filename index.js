@@ -9,17 +9,31 @@ const fs = require("fs");
 
 const generateHTML = require("./src/generateHTML");
 
+const teamMemberArray = [];
 class Team {
   constructor() {}
 
   // ask for if needed to add another member
+  // if needed, add engineer or inter
+  // else generateHTML(teamMemberArray) as html data, and then write index.html in disc folder
   askForAddMember(data) {
     if (data.addmember == "Engineer") {
       this.inputEngineer();
     } else if (data.addmember == "Intern") {
       this.inputIntern();
     } else {
-      this.quit();
+      let htmlData = generateHTML(teamMemberArray);
+      let writeToFile = fs.writeFile(
+        "./disc/index.html",
+        htmlData,
+        function (err) {
+          if (err) {
+            console.log(err);
+          }
+          console.log("Successfully created index.html!");
+        }
+      );
+      return writeToFile;
     }
   }
 
@@ -44,7 +58,7 @@ class Team {
         },
         {
           type: "input",
-          name: "officenumber",
+          name: "officeNumber",
           message: "What is the team manager's office number?",
         },
         {
@@ -60,12 +74,14 @@ class Team {
       ])
       .then((answers) => {
         console.log(answers);
-        let newManager = new Manager(
+        let manager = new Manager(
           answers.managername,
           answers.id,
           answers.email,
-          answers.officenumber
+          answers.officeNumber
         );
+
+        teamMemberArray.push(manager);
 
         this.askForAddMember(answers);
       });
@@ -108,12 +124,14 @@ class Team {
       ])
       .then((answers) => {
         console.log(answers);
-        let newEngineer = new Engineer(
+        let engineer = new Engineer(
           answers.engineername,
           answers.id,
           answers.email,
           answers.github
         );
+
+        teamMemberArray.push(engineer);
         this.askForAddMember(answers);
       });
   }
@@ -155,17 +173,17 @@ class Team {
       ])
       .then((answers) => {
         console.log(answers);
-        let newIntern = new Intern(
+        let intern = new Intern(
           answers.internname,
           answers.id,
           answers.email,
           answers.school
         );
+
+        teamMemberArray.push(intern);
         this.askForAddMember(answers);
       });
   }
-
-  quit() {}
 }
 
 const team = new Team();
