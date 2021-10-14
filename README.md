@@ -35,9 +35,7 @@ npm
 To install necessary dependencies, run the following command:
 
 ```
-npm init -y
-npm i inquirer
-npm i jest
+npm i
 ```
 
 ## Tests
