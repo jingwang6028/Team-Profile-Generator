@@ -7,14 +7,16 @@ const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+// html template from src folder
 const generateHTML = require("./src/generateHTML");
 
+// array to collect all the team members
 const teamMemberArray = [];
 class Team {
   constructor() {}
 
   // ask for if needed to add another member
-  // if needed, add engineer or inter
+  // if needed, add engineer or intern
   // else generateHTML(teamMemberArray) as html data, and then write index.html in disc folder
   askForAddMember(data) {
     if (data.addmember == "Engineer") {
